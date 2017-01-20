@@ -1,0 +1,203 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ceph</groupId>
+    <artifactId>rados</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>rados java bindings</name>
+    <description>Java API for the RADOS C library</description>
+    <url>http://www.ceph.com</url>
+    <licenses>
+        <license>
+            <name>LGPLv2</name>
+        </license>
+    </licenses>
+    <scm>
+        <url>http://www.github.com/ceph/rados-java</url>
+    </scm>
+
+    <build>
+      <defaultGoal>install</defaultGoal>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
+          <configuration>
+            <source>1.7</source>
+            <target>1.7</target>
+          </configuration>
+        </plugin>
+        <plugin>
+	        <groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-surefire-plugin</artifactId>
+	        <configuration>
+	          <skip>true</skip>
+	        </configuration>
+	      </plugin>
+	      <plugin>  
+                <groupId>org.apache.maven.plugins</groupId>  
+                <artifactId>maven-war-plugin</artifactId>  
+                <version>2.6</version>  
+                <configuration>  
+                    <archive>  
+                        <addMavenDescriptor>false</addMavenDescriptor>  
+                    </archive>  
+                    <!-- 
+	                    <webappDirectory>${project.basedir}\WebContent</webappDirectory>  
+	               		<warSourceDirectory>${project.basedir}\WebContent</warSourceDirectory>  
+	                    <webXml>WebContent\WEB-INF\web.xml</webXml>   
+                     -->
+                </configuration>  
+            </plugin>  
+            <plugin>    
+		      <groupId>org.apache.maven.plugins</groupId>    
+		      <artifactId>maven-resources-plugin</artifactId>    
+		      <configuration>    
+		          <encoding>UTF-8</encoding>    
+		      </configuration>    
+		</plugin>
+      </plugins>
+        <resources>  
+            <resource>  
+                <directory>${project.basedir}/src/main/resource</directory>  
+                <filtering>true</filtering>  
+            </resource>  
+        </resources>  
+    </build>
+ <properties>
+       <spring.version>4.1.6.RELEASE</spring.version>
+       <!-- mybatis版本号 -->  
+       <!-- log4j日志文件管理包版本 -->  
+       <slf4j.version>1.7.7</slf4j.version>  
+       <log4j.version>1.2.17</log4j.version>  
+       <jackson.version>2.5.1</jackson.version>
+  </properties>
+ <dependencies>
+     <!-- spring jackson dependency -->
+	  <dependency>
+	       <groupId>com.fasterxml.jackson.core</groupId>
+	       <artifactId>jackson-core</artifactId>
+	       <version>${jackson.version}</version>
+	   </dependency>
+	   <dependency>
+	       <groupId>com.fasterxml.jackson.core</groupId>
+	       <artifactId>jackson-databind</artifactId>
+	       <version>${jackson.version}</version>
+	   </dependency>
+      <!--  spring -->
+	     <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-core</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-web</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-webmvc</artifactId>
+	        <version>${spring.version}</version>
+	    </dependency>
+	     
+	   <!-- msc dependies -->
+	   <dependency>  
+            <groupId>com.alibaba</groupId>  
+            <artifactId>fastjson</artifactId>  
+            <version>1.1.41</version>  
+        </dependency> 
+        <!-- JSTL标签类 -->  
+        <dependency>  
+            <groupId>jstl</groupId>  
+            <artifactId>jstl</artifactId>  
+            <version>1.2</version>  
+        </dependency>  
+        <!-- log start -->  
+        <dependency>  
+            <groupId>log4j</groupId>  
+            <artifactId>log4j</artifactId>  
+            <version>${log4j.version}</version>  
+        </dependency>  
+  
+        <dependency>  
+            <groupId>org.slf4j</groupId>  
+            <artifactId>slf4j-api</artifactId>  
+            <version>${slf4j.version}</version>  
+        </dependency>  
+  
+        <dependency>  
+            <groupId>org.slf4j</groupId>  
+            <artifactId>slf4j-log4j12</artifactId>  
+            <version>${slf4j.version}</version>  
+        </dependency>  
+        <!-- log end -->  
+       
+        <!-- 上传组件包 -->  
+        <dependency>  
+            <groupId>commons-fileupload</groupId>  
+            <artifactId>commons-fileupload</artifactId>  
+            <version>1.3.1</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>commons-io</groupId>  
+            <artifactId>commons-io</artifactId>  
+            <version>2.4</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>commons-codec</groupId>  
+            <artifactId>commons-codec</artifactId>  
+            <version>1.9</version>  
+        </dependency>  
+	        
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId>
+		    <version>2.5</version>
+		    <scope>provided</scope>
+		</dependency>
+    	<!-- ceph support -->
+        <dependency>
+          <groupId>net.java.dev.jna</groupId>
+          <artifactId>jna</artifactId>
+          <version>4.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.5</version>
+            <scope>test</scope>
+        </dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>20.0</version>
+		</dependency>
+    </dependencies>
+		<repositories>  
+    <repository>  
+			<!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id  
+			就会覆盖中央仓库的配置 --> <id>mvnrepository</id>  
+			<name>mvnrepository</name>  
+			<url>http://www.mvnrepository.com/</url>  
+			<layout>default</layout>  
+			<releases>  
+				<enabled>true</enabled>  
+			</releases>  
+			<snapshots>  
+				<enabled>false</enabled>  
+			</snapshots>  
+		</repository>  
+	</repositories>  
+</project>
